@@ -1,6 +1,6 @@
 ![](https://github.com/apivideo/API_OAS_file/blob/master/apivideo_banner.png)
 # @api.video/react-native-api-video-uploader
-![npm](https://img.shields.io/npm/v/@api.video/react-native-api-video-uploader ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
+![npm](https://img.shields.io/npm/v/@api.video/react-native-api-video-uploader) ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
 
 This module is an easy way to upload video with delegated token to Api.Video
 
