@@ -10,16 +10,19 @@
   "files": [
     "src",
     "lib",
-    "android",
+    "android/gradle/gradle-wrapper.propoerties",
+    "android/src",
+    "android/build.gradle",
+    "android/gradle.properties",
     "ios",
     "cpp",
-    "react-native-api-video-uploader.podspec",
+    "api-video-react-native-livestream.podspec",
     "!lib/typescript/example",
-    "!android/build",
     "!ios/build",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__"
+    "!**/__mocks__",
+    "!.DS_Store"
   ],
   "scripts": {
     "test": "jest",
