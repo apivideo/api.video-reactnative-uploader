@@ -1,9 +1,6 @@
 import { NativeModules } from 'react-native';
 import type { Video } from './video-type';
 
-type ApiVideoUploaderType = {
-  upload(token: string, filename: string, filepath: string): Promise<string>;
-};
 const { ApiVideoUploader } = NativeModules;
 export default {
   upload: (
@@ -23,4 +20,4 @@ export default {
       }
     );
   },
-};
+}
