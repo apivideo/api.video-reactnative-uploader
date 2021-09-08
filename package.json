@@ -1,5 +1,5 @@
 {
-  "name": "react-native-api-video-uploader",
+  "name": "@api.video/react-native-api-video-uploader",
   "version": "0.1.0",
   "description": "This module is an easy way to upload video with delegated token to Api.Video",
   "main": "lib/commonjs/index",
