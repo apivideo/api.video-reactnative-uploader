@@ -1,6 +1,6 @@
 {
   "name": "@api.video/react-native-api-video-uploader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This module is an easy way to upload video with delegated token to Api.Video",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -16,7 +16,7 @@
     "android/gradle.properties",
     "ios",
     "cpp",
-    "api-video-react-native-livestream.podspec",
+    "react-native-api-video-uploader.podspec",
     "!lib/typescript/example",
     "!ios/build",
     "!**/__tests__",
