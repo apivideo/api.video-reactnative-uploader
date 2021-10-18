@@ -50,7 +50,7 @@ If you have any questions, ask us here:  https://community.api.video .
 Or use [Issues].
 
 ### Example App
-You can try our [example app](https://github.com/apivideo/react-native-api-video-uploader/tree/main/example), feel free to test it. 
+You can try our [example app](https://github.com/apivideo/react-native-api-video-uploader/tree/master/example), feel free to test it. 
 
 ## License
 
