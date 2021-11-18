@@ -39,13 +39,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/apivideo/react-native-api-video-uploader",
-  "author": "romain petit <romainp@api.video> (https://github.com/apivideo/react-native-api-video-uploader)",
+  "repository": "https://github.com/apivideo/api.video-reactnative-uploader",
+  "author": "api.video ecosystem team <ecosystem@api.video> (https://github.com/apivideo/api.video-reactnative-uploader)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/apivideo/react-native-api-video-uploader/issues"
+    "url": "https://github.com/apivideo/api.video-reactnative-uploader/issues"
   },
-  "homepage": "https://github.com/apivideo/react-native-api-video-uploader#readme",
+  "homepage": "https://github.com/apivideo/api.video-reactnative-uploader#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
