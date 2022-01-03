@@ -2,6 +2,7 @@
   "name": "@api.video/react-native-api-video-uploader",
   "version": "0.1.1",
   "description": "This module is an easy way to upload video with delegated token to Api.Video",
+  "license": "MIT",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

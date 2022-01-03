@@ -1,7 +1,8 @@
 {
   "name": "react-native-api-video-uploader-example",
-  "description": "Example app for react-native-api-video-uploader",
   "version": "0.0.1",
+  "description": "Example app for react-native-api-video-uploader",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
