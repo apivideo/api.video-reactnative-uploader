@@ -1,0 +1,49 @@
+name: Build
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+  build-android-lib:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install
+      - name: Make Gradlew Executable
+        run: |
+            cd android
+            chmod +x ./gradlew
+      - name: Build Android lib
+        run: |
+            cd android
+            ./gradlew assembleRelease --no-daemon 
+  build-android-example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install
+      - name: Install example dependencies
+        run: |
+          cd example
+          yarn install
+      - name: Make Gradlew Executable
+        run: |
+          cd example/android
+          chmod +x ./gradlew
+      - name: Build Android example
+        run: |
+          cd example/android
+          ./gradlew bundleRelease --no-daemon
