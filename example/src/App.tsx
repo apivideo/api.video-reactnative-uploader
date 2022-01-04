@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import * as ImagePicker from 'react-native-image-picker';
-import ApiVideoUploader from '@api.video/react-native-api-video-uploader';
+import ApiVideoUploader from '@api.video/react-native-uploader';
 import RNFetchBlob from 'rn-fetch-blob';
 import { DemoButton } from './components/DemoButton';
 import { DemoResponse } from './components/DemoResponse';
