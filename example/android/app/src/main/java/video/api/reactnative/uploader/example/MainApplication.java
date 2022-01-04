@@ -1,7 +1,8 @@
-package com.example.reactnativeapivideouploader;
+package video.api.reactnative.uploader.example;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -10,7 +11,7 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import com.reactnativeapivideouploader.ApiVideoUploaderPackage;
+import video.api.reactnative.uploader.UploaderPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -27,7 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for ApiVideoUploaderExample:
           // packages.add(new MyReactNativePackage());
-          packages.add(new ApiVideoUploaderPackage());
+          packages.add(new UploaderPackage());
           return packages;
         }
 

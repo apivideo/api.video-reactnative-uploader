@@ -1,4 +1,4 @@
-package com.example.reactnativeapivideouploader;
+package video.api.reactnative.uploader.example;
 
 import com.facebook.react.ReactActivity;
 

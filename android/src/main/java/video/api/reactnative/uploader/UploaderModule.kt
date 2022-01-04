@@ -1,4 +1,4 @@
-package com.reactnativeapivideouploader
+package video.api.reactnative.uploader
 
 import android.net.Uri
 import com.facebook.react.bridge.ReactApplicationContext
@@ -31,7 +31,7 @@ import android.os.Build
 
 
 
-class ApiVideoUploaderModule(var reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class UploaderModule(var reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String {
         return "ApiVideoUploader"
