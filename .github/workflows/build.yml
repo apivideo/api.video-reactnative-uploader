@@ -19,13 +19,11 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Make Gradlew Executable
-        run: |
-            cd android
-            chmod +x ./gradlew
+        run: chmod +x ./gradlew
+        working-directory: android
       - name: Build Android lib
-        run: |
-            cd android
-            ./gradlew assembleRelease --no-daemon 
+        run: ./gradlew assembleRelease --no-daemon 
+        working-directory: android
   build-android-example:
     runs-on: ubuntu-latest
     steps:
@@ -36,14 +34,29 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Install example dependencies
-        run: |
-          cd example
-          yarn install
+        run: yarn install
+        working-directory: example
       - name: Make Gradlew Executable
-        run: |
-          cd example/android
-          chmod +x ./gradlew
+        run: chmod +x ./gradlew
+        working-directory: example/android
       - name: Build Android example
-        run: |
-          cd example/android
-          ./gradlew bundleRelease --no-daemon
+        run: ./gradlew bundleRelease --no-daemon
+        working-directory: example/android
+  build-ios-example:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install
+      - name: Install example dependencies
+        run: yarn install
+        working-directory: example
+      - name: Install pods 
+        run: pod install
+        working-directory: example/ios
+      - name: Build iOS example
+        run: xcodebuild clean build -workspace ApiVideoUploaderExample.xcworkspace -scheme ApiVideoUploaderExample CODE_SIGNING_ALLOWED=NO | xcpretty
+        working-directory: example/ios
