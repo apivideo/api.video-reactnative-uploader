@@ -30,27 +30,28 @@ export default function App() {
     }
   }, []);
 
-  const upload = React.useCallback(
-    (token: string, name: string, uri: string) => {
-      if (Platform.OS === 'android') {
-        console.log(`video path : `, uri);
-        RNFetchBlob.fs.stat(uri).then((stat) => {
-          ApiVideoUploader.upload(token, name, stat.path).then(
-            (value: Video) => {
-              console.log(`json video : `, value);
-              Alert.alert(`resultat upload : ${value.videoId}`);
-            }
-          );
-        });
-      } else {
-        ApiVideoUploader.upload(token, name, uri).then((value: Video) => {
+  const upload = React.useCallback((token: string, uri: string) => {
+    if (Platform.OS === 'android') {
+      console.log(`video path : `, uri);
+      RNFetchBlob.fs.stat(uri).then((stat) => {
+        ApiVideoUploader.uploadWithUploadToken(token, stat.path).then(
+          (value: Video) => {
+            console.log(`json video : `, value);
+            Alert.alert(`resultat upload : ${value.videoId}`);
+          }
+        );
+      });
+    } else {
+      console.log(`token : `, token);
+      console.log(`uri : `, uri);
+      ApiVideoUploader.uploadWithUploadToken(token, uri).then(
+        (value: Video) => {
           console.log(`json video : `, value);
-          Alert.alert(`resultat upload : ${value._public}`);
-        });
-      }
-    },
-    []
-  );
+          Alert.alert(`resultat upload : ${value.videoId}`);
+        }
+      );
+    }
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -70,9 +71,7 @@ export default function App() {
         </View>
         <DemoResponse>{response}</DemoResponse>
         <Button
-          onPress={() =>
-            upload('YOUR_TOKEN', 'test name', response.assets[0].uri)
-          }
+          onPress={() => upload('My video token', response.assets[0].uri)}
           title="upload video"
           color="#841584"
         />

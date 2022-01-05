@@ -3,12 +3,8 @@ import type { Video } from './video-type';
 
 const { ApiVideoUploader } = NativeModules;
 export default {
-  upload: (
-    token: string,
-    filename: string,
-    filepath: string
-  ): Promise<Video> => {
-    return ApiVideoUploader.upload(token, filename, filepath).then(
+  uploadWithUploadToken: (token: string, filepath: string): Promise<Video> => {
+    return ApiVideoUploader.uploadWithUploadToken(token, filepath).then(
       (value: string) => {
         console.log(`return value`, value);
         const json = JSON.parse(value);
