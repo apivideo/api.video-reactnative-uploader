@@ -9,21 +9,25 @@ import {
 
 interface Props {
   onPress: () => void;
+  disabled?: boolean;
+  color?: string;
 }
 
 export function DemoButton({
   onPress,
   children,
+  disabled,
+  color,
 }: React.PropsWithChildren<Props>) {
   return (
     <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [
-        {
-          backgroundColor: pressed ? 'skyblue' : 'steelblue',
-        },
-        styles.container,
-      ]}
+      onPress={() => {
+        if (!disabled) onPress();
+      }}
+      style={{
+        backgroundColor: color ? color : disabled ? '#FF7355' : '#F64325',
+        ...styles.container,
+      }}
     >
       <Text style={styles.text}>{children}</Text>
     </Pressable>

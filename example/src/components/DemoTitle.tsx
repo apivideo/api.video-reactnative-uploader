@@ -1,13 +1,22 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ViewStyle,
+  TextStyle,
+  Image,
+  ImageStyle,
+} from 'react-native';
 
 interface Props {
-  children: string;
+  children: any;
 }
 
 export function DemoTitle({ children }: Props) {
   return (
     <View style={styles.container}>
+      <Image style={styles.logo} source={require('../logo.png')} />
       <Text style={styles.text}>{children}</Text>
     </View>
   );
@@ -16,6 +25,7 @@ export function DemoTitle({ children }: Props) {
 interface Styles {
   container: ViewStyle;
   text: TextStyle;
+  logo: ImageStyle;
 }
 
 const styles = StyleSheet.create<Styles>({
@@ -24,7 +34,12 @@ const styles = StyleSheet.create<Styles>({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 16,
-    backgroundColor: 'steelblue',
+    backgroundColor: '#080B13',
+    display: 'flex',
+  },
+  logo: {
+    height: 64,
+    width: 64,
   },
   text: {
     fontSize: 24,
