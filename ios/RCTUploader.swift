@@ -16,10 +16,10 @@ class RCTUploader: NSObject {
     func setChunkSize(size: NSNumber, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
         do {
             try ApiVideoUploader.setChunkSize(chunkSize: Int(truncating: size))
+            resolve(ApiVideoUploader.getChunkSize())
         } catch {
             reject("failed_to_set_chunk_size", "Failed to set chunk size", error)
         }
-        resolve(NSNull())
     }
     
     @objc(uploadWithUploadToken::withResolver:withRejecter:)
@@ -34,7 +34,7 @@ class RCTUploader: NSObject {
                     }
                     reject(String(code), message, error)
                 } else {
-                    reject("uploadWithUploadToken_failed", "Upload with upload token failed", error)
+                    reject("upload_with_upload_token_failed", "Upload with upload token failed", error)
                 }
             }
             if let video = video {

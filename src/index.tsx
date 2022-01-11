@@ -14,8 +14,8 @@ export default {
   setApiKey: (apiKey: string): void => {
     ApiVideoUploader.setApiKey(apiKey);
   },
-  setChunkSize: (size: number): void => {
-    ApiVideoUploader.setChunkSize(size);
+  setChunkSize: (size: number): Promise<Number> => {
+    return ApiVideoUploader.setChunkSize(size);
   },
   uploadWithUploadToken: (token: string, filepath: string): Promise<Video> => {
     return ApiVideoUploader.uploadWithUploadToken(token, filepath).then(

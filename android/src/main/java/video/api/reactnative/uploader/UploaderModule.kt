@@ -37,9 +37,9 @@ class UploaderModule(reactContext: ReactApplicationContext) :
   fun setChunkSize(size: Int, promise: Promise) {
     try {
       videosApi.apiClient.uploadChunkSize = size.toLong()
-      promise.resolve(null)
+      promise.resolve(videosApi.apiClient.uploadChunkSize)
     } catch (e: Exception) {
-      promise.reject(e)
+      promise.reject("failed_to_set_chunk_size", "Failed to set chunk size", e)
     }
   }
 
@@ -48,7 +48,7 @@ class UploaderModule(reactContext: ReactApplicationContext) :
     try {
       promise.resolve(json.serialize(videosApi.uploadWithUploadToken(token, File(filePath))))
     } catch (e: Exception) {
-      promise.reject(e)
+      promise.reject("upload_with_upload_token_failed", "Upload with upload token failed", e)
     }
   }
 
@@ -57,7 +57,7 @@ class UploaderModule(reactContext: ReactApplicationContext) :
     try {
       promise.resolve(json.serialize(videosApi.upload(videoId, File(filePath))))
     } catch (e: Exception) {
-      promise.reject(e)
+      promise.reject("upload_failed", "Upload failed", e)
     }
   }
 }
