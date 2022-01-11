@@ -1,6 +1,6 @@
-rootProject.name = 'ApiVideoUploaderExample'
+rootProject.name = 'ApiVideoUploader'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 
-include ':reactnativeapivideouploader'
-project(':reactnativeapivideouploader').projectDir = new File(rootProject.projectDir, '../../android')
+include ':uploader'
+project(':uploader').projectDir = new File(rootProject.projectDir, '../../android')
