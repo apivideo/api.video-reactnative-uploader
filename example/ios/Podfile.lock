@@ -252,7 +252,7 @@ PODS:
   - React-jsinspector (0.63.4)
   - react-native-image-picker (4.0.6):
     - React-Core
-  - react-native-uploader (0.1.1):
+  - react-native-video-uploader (0.2.0):
     - ApiVideoUploader (= 0.1.2)
     - React-Core
   - React-RCTActionSheet (0.63.4):
@@ -359,7 +359,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - react-native-uploader (from `../..`)
+  - react-native-video-uploader (from `../..`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -424,7 +424,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
-  react-native-uploader:
+  react-native-video-uploader:
     :path: "../.."
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
@@ -482,7 +482,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-image-picker: a6e56460d34905c849ada551db30897dc7f3d535
-  react-native-uploader: b20817f19015d07b66871c51212110d48e92e0e0
+  react-native-video-uploader: a7279bdc1be5b867dbd82d93224a5578f3619caa
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -497,6 +497,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 1ef8a38c4695fdd59ab6d2e41ddce5acfac2e269
+PODFILE CHECKSUM: c2b9dd1d61da1074c883f5af3733c5ed77048ed8
 
 COCOAPODS: 1.11.2

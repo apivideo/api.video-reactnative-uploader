@@ -1,4 +1,4 @@
-import ApiVideoUploader from '@api.video/react-native-uploader';
+import ApiVideoUploader from '@api.video/react-native-video-uploader';
 import * as React from 'react';
 import {
   Alert,
