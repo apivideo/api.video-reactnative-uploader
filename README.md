@@ -50,7 +50,7 @@ cd ios && pod install
 ```js
 import ApiVideoUploader from '@api.video/react-native-video-uploader';
 
-ApiVideoUploader.upload('MY_VIDEO_TOKEN', 'my-video.mp4')
+ApiVideoUploader.uploadWithUploadToken('MY_VIDEO_TOKEN', 'my-video.mp4')
   .then((value: Video) => {
    // Manages success here
   })
