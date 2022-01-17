@@ -75,4 +75,8 @@ class RCTUploader: NSObject {
             }
         }
     }
+
+    @objc static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
 }

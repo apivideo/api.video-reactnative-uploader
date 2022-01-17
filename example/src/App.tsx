@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import type { ImagePickerResponse } from 'react-native-image-picker';
 import * as ImagePicker from 'react-native-image-picker';
-import RNFetchBlob from 'rn-fetch-blob';
+import ReactNativeBlobUtil from 'react-native-blob-util';
 import type { Video } from 'src/video-type';
 import { DemoButton } from './components/DemoButton';
 import { DemoResponse } from './components/DemoResponse';
@@ -81,7 +81,7 @@ export default function App() {
 
       const resolveUri = (u: string): Promise<string> => {
         return Platform.OS === 'android'
-          ? RNFetchBlob.fs.stat(u).then((stat) => stat.path)
+          ? ReactNativeBlobUtil.fs.stat(u).then((stat) => stat.path)
           : new Promise((resolve, _) => resolve(u));
       };
 
