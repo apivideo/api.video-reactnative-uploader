@@ -1,6 +1,6 @@
 {
   "name": "@api.video/react-native-video-uploader",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The official React Native video uploader for api.video",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

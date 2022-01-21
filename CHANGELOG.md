@@ -1,6 +1,10 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [0.2.1] - 2022-01-21
+- Remove jcenter as a dependency repository
+- Update dependencies (react-native)
+
 ## [0.2.0] - 2022-01-12
 - Rename package to `@api.video/react-native-video-uploader`
 - Add `upload` by videoId
