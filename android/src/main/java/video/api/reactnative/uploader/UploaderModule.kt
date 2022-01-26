@@ -13,6 +13,10 @@ class UploaderModule(reactContext: ReactApplicationContext) :
   private var videosApi = VideosApi()
   private val json = JSON()
 
+  init {
+    videosApi.apiClient.setApplicationName("reactnative-uploader")
+  }
+
   override fun getName(): String {
     return "ApiVideoUploader"
   }
