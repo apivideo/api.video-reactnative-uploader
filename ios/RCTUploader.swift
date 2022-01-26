@@ -2,6 +2,11 @@ import ApiVideoUploader
 
 @objc(RCTUploader)
 class RCTUploader: NSObject {
+    
+    override init() {
+        try? ApiVideoUploader.setApplicationName(applicationName: "reactnative-uploader")
+    }
+    
     @objc(setEnvironment:)
     func setEnvironment(environment: String) -> Void {
         ApiVideoUploader.basePath = environment

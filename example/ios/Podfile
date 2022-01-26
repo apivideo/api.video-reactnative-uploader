@@ -9,7 +9,6 @@ target 'Example' do
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'react-native-video-uploader', :path => '../..'
-  pod 'react-native-blob-util', :path => '../node_modules/react-native-blob-util'
 
   # Enables Flipper.
   #

@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [0.2.2] - 2022-01-21
+- Define the application name when instanciating native uploader libraries
+  
 ## [0.2.1] - 2022-01-21
 - Remove jcenter as a dependency repository
 - Update dependencies (react-native)
