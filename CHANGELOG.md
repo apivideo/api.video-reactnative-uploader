@@ -1,6 +1,12 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.0.0] - 2022-07-06
+- Android: Fix set chunk unhandled exception
+- Add API to set application name
+- Set SDK name
+- Update dependencies
+
 ## [0.2.2] - 2022-01-21
 - Define the application name when instanciating native uploader libraries
   
