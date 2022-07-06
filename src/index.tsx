@@ -8,6 +8,9 @@ export enum Environment {
 
 const { ApiVideoUploader } = NativeModules;
 export default {
+  setApplicationName: (name: string, version: string): void => {
+    ApiVideoUploader.setApplicationName(name, version);
+  },
   setEnvironment: (environment: Environment): void => {
     ApiVideoUploader.setEnvironment(environment);
   },

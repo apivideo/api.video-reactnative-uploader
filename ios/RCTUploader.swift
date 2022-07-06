@@ -4,7 +4,7 @@ import ApiVideoUploader
 class RCTUploader: NSObject {
     
     override init() {
-        try? ApiVideoUploader.setApplicationName(applicationName: "reactnative-uploader")
+        try? ApiVideoUploader.setSdkName(name: "reactnative-uploader", version: "1.0.0")
     }
     
     @objc(setEnvironment:)
@@ -17,6 +17,11 @@ class RCTUploader: NSObject {
         ApiVideoUploader.apiKey = apiKey
     }
  
+    @objc(setApplicationName::)
+    func setApplicationName(name: String, version: String) -> Void {
+        try! ApiVideoUploader.setApplicationName(name: name, version: version)
+    }
+    
     @objc(setChunkSize:withResolver:withRejecter:)
     func setChunkSize(size: NSNumber, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
         do {

@@ -127,6 +127,6 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'video.api:android-video-uploader:0.2.6'
-  implementation 'com.google.code.gson:gson:2.8.8'
+  implementation 'video.api:android-video-uploader:1.0.0'
+  implementation 'com.google.code.gson:gson:2.8.9'
 }

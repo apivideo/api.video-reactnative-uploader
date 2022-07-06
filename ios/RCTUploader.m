@@ -6,6 +6,8 @@ RCT_EXTERN_METHOD(setEnvironment:(NSString)environment)
 
 RCT_EXTERN_METHOD(setApiKey:(NSString)apiKey)
 
+RCT_EXTERN_METHOD(setApplicationName:(NSString)name:(NSString)version)
+
 RCT_EXTERN_METHOD(setChunkSize:(nonnull NSNumber)size
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
