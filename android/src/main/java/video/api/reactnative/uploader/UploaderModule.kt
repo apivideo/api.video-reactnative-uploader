@@ -46,7 +46,7 @@ class UploaderModule(reactContext: ReactApplicationContext) :
   fun setChunkSize(size: Int, promise: Promise) {
     try {
       videosApi.apiClient.uploadChunkSize = size.toLong()
-      promise.resolve(videosApi.apiClient.uploadChunkSize)
+      promise.resolve(videosApi.apiClient.uploadChunkSize.toInt())
     } catch (e: Exception) {
       promise.reject("failed_to_set_chunk_size", "Failed to set chunk size", e)
     }
