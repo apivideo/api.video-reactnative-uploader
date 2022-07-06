@@ -126,7 +126,7 @@ export default function App() {
         )}
         {!uploadResult && videoFile && (
           <>
-            <DemoResponse videoFile={videoFile}></DemoResponse>
+            <DemoResponse videoFile={videoFile} />
             <Text style={styles.textSectionTitle}>
               Then, define your settings:
             </Text>
@@ -146,7 +146,7 @@ export default function App() {
                 placeholder="Your upload token"
                 value={uploadToken}
                 onChangeText={setUploadToken}
-              ></TextInput>
+              />
             </View>
             <View
               style={{
@@ -165,7 +165,7 @@ export default function App() {
                 value={chunkSize}
                 onChangeText={(a) => setChunkSize(a)}
                 keyboardType="numeric"
-              ></TextInput>
+              />
             </View>
             <Text style={styles.textSectionTitle}>And finally... upload!</Text>
             <DemoButton

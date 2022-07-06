@@ -27,7 +27,7 @@ export default {
 
         return {
           ...json,
-          _public: json['public'],
+          _public: json.public,
         } as Video;
       }
     );
@@ -38,7 +38,7 @@ export default {
 
       return {
         ...json,
-        _public: json['public'],
+        _public: json.public,
       } as Video;
     });
   },
