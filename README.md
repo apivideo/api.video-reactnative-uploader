@@ -19,7 +19,7 @@
 
 # Project description
 
-This module is an easy way to upload video with delegated token to Api.Video
+This module is an easy way to upload video with delegated token to api.video
 
 # Getting started
 
