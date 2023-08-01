@@ -1,3 +1,9 @@
+
+export enum Environment {
+  Sandbox = 'https://sandbox.api.video',
+  Production = 'https://ws.api.video',
+}
+
 export interface Video {
   /**
    * The unique identifier of the video object.
