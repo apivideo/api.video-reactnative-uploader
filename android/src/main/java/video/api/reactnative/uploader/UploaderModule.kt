@@ -8,7 +8,7 @@ import video.api.uploader.VideosApi
 import video.api.uploader.api.JSON
 import java.io.File
 
-class UploaderModule(reactContext: ReactApplicationContext): UploaderModuleSpec(reactContext) {
+class UploaderModule(private val reactContext: ReactApplicationContext): UploaderModuleSpec(reactContext) {
   private var videosApi = VideosApi()
   private val json = JSON()
 
@@ -51,6 +51,10 @@ class UploaderModule(reactContext: ReactApplicationContext): UploaderModuleSpec(
 
   @ReactMethod
   override fun uploadWithUploadToken(token: String, filePath: String, promise: Promise) {
+    if (!reactContext.hasPermission(Utils.readPermission)) {
+      promise.reject("missing_permission", "Missing permission ${Utils.readPermission}")
+      return
+    }
     try {
       val video = videosApi.uploadWithUploadToken(token, File(filePath))
       promise.resolve(json.serialize(video))
@@ -61,6 +65,10 @@ class UploaderModule(reactContext: ReactApplicationContext): UploaderModuleSpec(
 
   @ReactMethod
   override fun upload(videoId: String, filePath: String, promise: Promise) {
+    if (!reactContext.hasPermission(Utils.readPermission)) {
+      promise.reject("missing_permission", "Missing permission ${Utils.readPermission}")
+      return
+    }
     try {
       val video = videosApi.upload(videoId, File(filePath))
       promise.resolve(json.serialize(video))
