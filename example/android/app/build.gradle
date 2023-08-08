@@ -101,11 +101,6 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
-
-    lintOptions {
-        // HACK: Remove error for Notification permission from uploader for Androd 33+
-        disable 'NotificationPermission'
-    }
 }
 
 dependencies {

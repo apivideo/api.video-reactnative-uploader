@@ -8,6 +8,7 @@ export interface Spec extends TurboModule {
     setEnvironment: (environment: string) => void;
     setApiKey: (apiKey: string) => void;
     setChunkSize: (size: number) => Promise<number>;
+
     uploadWithUploadToken: (token: string, filepath: string) => Promise<String>;
     upload: (videoId: string, filepath: string) => Promise<String>;
 }
