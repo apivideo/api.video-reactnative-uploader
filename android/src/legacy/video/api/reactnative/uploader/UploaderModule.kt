@@ -17,7 +17,7 @@ abstract class UploaderModuleSpec(reactContext: ReactApplicationContext) :
 
   abstract fun setTimeout(timeout: Double)
 
-  abstract fun uploadWithUploadToken(token: String, filePath: String, promise: Promise)
+  abstract fun uploadWithUploadToken(token: String, filePath: String, videoId: String?, promise: Promise)
 
   abstract fun upload(videoId: String, filePath: String, promise: Promise)
 }

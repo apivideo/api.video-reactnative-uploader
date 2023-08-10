@@ -16,7 +16,6 @@ import video.api.uploader.api.work.upload
 import video.api.uploader.api.work.uploadWithUploadToken
 import video.api.uploader.api.work.workers.AbstractUploadWorker
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 
 class UploaderModule(private val reactContext: ReactApplicationContext) :
@@ -79,11 +78,16 @@ class UploaderModule(private val reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod
-  override fun uploadWithUploadToken(token: String, filePath: String, promise: Promise) {
+  override fun uploadWithUploadToken(
+    token: String,
+    filePath: String,
+    videoId: String?,
+    promise: Promise
+  ) {
     permissionManager.requestPermission(
       Utils.readPermission,
       onGranted = {
-        uploadWithUploadTokenAndObserve(token, filePath, promise)
+        uploadWithUploadTokenAndObserve(token, filePath, videoId, promise)
       },
       onShowPermissionRationale = { onRequiredPermissionLastTime ->
         (reactContext.currentActivity as AppCompatActivity).showDialog(
@@ -103,9 +107,14 @@ class UploaderModule(private val reactContext: ReactApplicationContext) :
     return
   }
 
-  private fun uploadWithUploadTokenAndObserve(token: String, filePath: String, promise: Promise) {
+  private fun uploadWithUploadTokenAndObserve(
+    token: String,
+    filePath: String,
+    videoId: String?,
+    promise: Promise
+  ) {
     try {
-      val operationWithRequest = workManager.uploadWithUploadToken(token, File(filePath))
+      val operationWithRequest = workManager.uploadWithUploadToken(token, File(filePath), videoId)
       val workInfoLiveData = workManager.getWorkInfoByIdLiveData(operationWithRequest.request.id)
       handler.post {
         workInfoLiveData.observeTillItFinishes(

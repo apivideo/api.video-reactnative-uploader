@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (5.4.4)
   - AnyCodable-FlightSchool (0.6.7)
-  - ApiVideoUploader (1.1.1):
+  - ApiVideoUploader (1.2.1):
     - Alamofire (~> 5.4.3)
     - AnyCodable-FlightSchool (~> 0.6.1)
   - boost (1.76.0)
@@ -385,7 +385,7 @@ PODS:
   - react-native-image-picker (5.6.0):
     - React-Core
   - react-native-video-uploader (1.1.0):
-    - ApiVideoUploader (= 1.1.1)
+    - ApiVideoUploader (= 1.2.1)
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - React-NativeModulesApple (0.72.2):
@@ -681,7 +681,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   AnyCodable-FlightSchool: 261cbe76757802b17d471b9059b21e6fa5edf57b
-  ApiVideoUploader: d64cb6546058c6e9f67157c7c48c60d00ddd724c
+  ApiVideoUploader: a457398d464702bf5733d8b5a64115ffe333f685
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
@@ -717,7 +717,7 @@ SPEC CHECKSUMS:
   React-logger: 48a3629a61899735cbfa9f0b8c5cd44cb1561952
   react-native-blob-util: c5430d091e011b7fc57f888c356da2a2ff8dc8ad
   react-native-image-picker: db60857e03d63721f19b6f4027de20429ddd9cba
-  react-native-video-uploader: e0c1e518dd6430b0926b10d6c2c321ca452a878e
+  react-native-video-uploader: 9f4658be6417d486ce6376d714cbfd75c7148935
   React-NativeModulesApple: 5dfdf09b36ffad0c08f401e86569b8f170a0035d
   React-perflogger: e7006abd30efeebef143702550063ca3415e267a
   React-RCTActionSheet: 017232a203ef82e42e54b15673e26489c2797745

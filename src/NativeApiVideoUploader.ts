@@ -10,7 +10,7 @@ export interface Spec extends TurboModule {
     setChunkSize: (size: number) => Promise<number>;
     setTimeout: (timeout: number) => void;
 
-    uploadWithUploadToken: (token: string, filepath: string) => Promise<String>;
+    uploadWithUploadToken: (token: string, filepath: string, videoId?: string) => Promise<String>;
     upload: (videoId: string, filepath: string) => Promise<String>;
 }
   

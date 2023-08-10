@@ -38,11 +38,11 @@ class RNUploader: NSObject {
         print(ApiVideoUploader.timeout)
     }
     
-    @objc(uploadWithUploadToken::withResolver:withRejecter:)
-    func uploadWithUploadToken(token: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+    @objc(uploadWithUploadToken:::withResolver:withRejecter:)
+    func uploadWithUploadToken(token: String, filePath: String, videoId: String?, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
         do {
             let url = URL(string: filePath)!
-            try VideosAPI.uploadWithUploadToken(token: token, file: url, onProgressReady: nil) { (video, error) in
+            try VideosAPI.uploadWithUploadToken(token: token, file: url, videoId: videoId, onProgressReady: nil) { (video, error) in
                 if let error = error {
                     if case let ErrorResponse.error(code, data, _, _) = error {
                         var message: String? = nil

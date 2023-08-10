@@ -45,8 +45,8 @@ export default {
   setTimeout: (timeout: number): void => {
     return ApiVideoUploader.setTimeout(timeout);
   },
-  uploadWithUploadToken: (token: string, filepath: string): Promise<Video> => {
-    return ApiVideoUploader.uploadWithUploadToken(token, filepath).then(
+  uploadWithUploadToken: (token: string, filepath: string, videoId?: string): Promise<Video> => {
+    return ApiVideoUploader.uploadWithUploadToken(token, filepath, videoId).then(
       (value: string) => {
         const json = JSON.parse(value);
 

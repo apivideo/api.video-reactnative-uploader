@@ -34,7 +34,7 @@ RCT_EXTERN_METHOD(setChunkSize:(nonnull NSNumber)size
 
 RCT_EXTERN_METHOD(setTimeout:(NSNumber)timeout)
 
-RCT_EXTERN_METHOD(uploadWithUploadToken:(NSString)token:(NSString)filePath
+RCT_EXTERN_METHOD(uploadWithUploadToken:(NSString)token:(NSString)filePath:(NSString)videoId
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 
