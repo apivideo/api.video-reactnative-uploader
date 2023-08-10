@@ -31,6 +31,12 @@ class RNUploader: NSObject {
             reject("failed_to_set_chunk_size", "Failed to set chunk size", error)
         }
     }
+
+    @objc(setTimeout:)
+    func setTimeout(timeout: NSNumber) -> Void {
+        ApiVideoUploader.timeout = timeout.doubleValue
+        print(ApiVideoUploader.timeout)
+    }
     
     @objc(uploadWithUploadToken::withResolver:withRejecter:)
     func uploadWithUploadToken(token: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {

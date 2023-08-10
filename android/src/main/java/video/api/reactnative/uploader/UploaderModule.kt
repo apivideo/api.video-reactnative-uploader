@@ -16,6 +16,7 @@ import video.api.uploader.api.work.upload
 import video.api.uploader.api.work.uploadWithUploadToken
 import video.api.uploader.api.work.workers.AbstractUploadWorker
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 
 class UploaderModule(private val reactContext: ReactApplicationContext) :
@@ -69,6 +70,13 @@ class UploaderModule(private val reactContext: ReactApplicationContext) :
     }
   }
 
+  @ReactMethod
+  override fun setTimeout(timeout: Double) {
+    val timeoutMs = (timeout * 1000).toInt()
+    videosApi.apiClient.connectTimeout = timeoutMs
+    videosApi.apiClient.readTimeout = timeoutMs
+    videosApi.apiClient.writeTimeout = timeoutMs
+  }
 
   @ReactMethod
   override fun uploadWithUploadToken(token: String, filePath: String, promise: Promise) {

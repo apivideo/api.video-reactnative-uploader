@@ -32,6 +32,8 @@ RCT_EXTERN_METHOD(setChunkSize:(nonnull NSNumber)size
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(setTimeout:(NSNumber)timeout)
+
 RCT_EXTERN_METHOD(uploadWithUploadToken:(NSString)token:(NSString)filePath
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)

@@ -38,6 +38,13 @@ export default {
   setChunkSize: (size: number): Promise<Number> => {
     return ApiVideoUploader.setChunkSize(size);
   },
+  /**
+   * Set the timeout for the upload, connection and read in seconds.
+   * @param timeout The timeout in seconds
+   */
+  setTimeout: (timeout: number): void => {
+    return ApiVideoUploader.setTimeout(timeout);
+  },
   uploadWithUploadToken: (token: string, filepath: string): Promise<Video> => {
     return ApiVideoUploader.uploadWithUploadToken(token, filepath).then(
       (value: string) => {
@@ -61,4 +68,3 @@ export default {
     });
   },
 };
-    
