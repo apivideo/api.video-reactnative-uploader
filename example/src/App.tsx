@@ -28,31 +28,15 @@ export default function App() {
 
   const requestPermissions = async () => {
     if (Platform.OS === 'android') {
-      const androidVersion = Number(Platform.constants['Release']);
-      var readPermission =  PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
-      if (androidVersion >= 13) {
-       readPermission = PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO
-      }
       const granted = await PermissionsAndroid.requestMultiple([
-        readPermission,
-        PermissionsAndroid.PERMISSIONS.CAMERA
+        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+        PermissionsAndroid.PERMISSIONS.CAMERA,
       ]);
 
-      var hasGrantedPermission = false;
-      if (granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log(granted['android.permission.CAMERA'])
-        if (androidVersion >= 13) {
-          if (granted['android.permission.READ_MEDIA_VIDEO'] === PermissionsAndroid.RESULTS.GRANTED) {
-            hasGrantedPermission = true
-          }
-        } else {
-          if (granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED) {
-            hasGrantedPermission = true
-          }
-        }
-      }
-
-      if (!hasGrantedPermission) {
+      if (
+        granted['android.permission.CAMERA'] !==
+        PermissionsAndroid.RESULTS.GRANTED
+      ) {
         throw new Error('Permissions request failed');
       }
     }

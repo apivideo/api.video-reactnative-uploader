@@ -1,23 +1,10 @@
-package video.api.reactnative.uploader
+package video.api.reactnative.uploader.extensions
 
-import android.content.Context
-import android.content.pm.PackageManager
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.WorkInfo
-
-/**
- * Check if the app has the given permission.
- *
- * @param permission The permission to check.
- * @return `true` if the app has the permission, `false` otherwise.
- */
-fun Context.hasPermission(permission: String): Boolean {
-  return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
-}
 
 
 fun LiveData<WorkInfo?>.observeTillItFinishes(

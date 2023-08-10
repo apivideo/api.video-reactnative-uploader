@@ -8,6 +8,8 @@ import androidx.work.WorkManager
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
+import video.api.reactnative.uploader.extensions.observeTillItFinishes
+import video.api.reactnative.uploader.extensions.showDialog
 import video.api.uploader.VideosApi
 import video.api.uploader.api.work.stores.VideosApiStore
 import video.api.uploader.api.work.upload
@@ -20,8 +22,8 @@ class UploaderModule(private val reactContext: ReactApplicationContext) :
   UploaderModuleSpec(reactContext) {
   private var videosApi = VideosApi()
   private val handler = Handler(Looper.getMainLooper())
-
   private val workManager = WorkManager.getInstance(reactContext)
+  private val permissionManager = PermissionManager(reactContext)
 
   init {
     initializeVideosApi()
@@ -70,10 +72,30 @@ class UploaderModule(private val reactContext: ReactApplicationContext) :
 
   @ReactMethod
   override fun uploadWithUploadToken(token: String, filePath: String, promise: Promise) {
-    if (!reactContext.hasPermission(Utils.readPermission)) {
-      promise.reject("missing_permission", "Missing permission ${Utils.readPermission}")
-      return
-    }
+    permissionManager.requestPermission(
+      Utils.readPermission,
+      onGranted = {
+        uploadWithUploadTokenAndObserve(token, filePath, promise)
+      },
+      onShowPermissionRationale = { onRequiredPermissionLastTime ->
+        (reactContext.currentActivity as AppCompatActivity).showDialog(
+          R.string.read_permission_required,
+          R.string.read_permission_required_message,
+          android.R.string.ok,
+          onPositiveButtonClick = { onRequiredPermissionLastTime() }
+        )
+      },
+      onDenied = {
+        promise.reject(
+          "missing_permission",
+          "Missing permission ${Utils.readPermission}"
+        )
+      }
+    )
+    return
+  }
+
+  private fun uploadWithUploadTokenAndObserve(token: String, filePath: String, promise: Promise) {
     try {
       val operationWithRequest = workManager.uploadWithUploadToken(token, File(filePath))
       val workInfoLiveData = workManager.getWorkInfoByIdLiveData(operationWithRequest.request.id)
@@ -115,10 +137,30 @@ class UploaderModule(private val reactContext: ReactApplicationContext) :
 
   @ReactMethod
   override fun upload(videoId: String, filePath: String, promise: Promise) {
-    if (!reactContext.hasPermission(Utils.readPermission)) {
-      promise.reject("missing_permission", "Missing permission ${Utils.readPermission}")
-      return
-    }
+    permissionManager.requestPermission(
+      Utils.readPermission,
+      onGranted = {
+        uploadAndObserve(videoId, filePath, promise)
+      },
+      onShowPermissionRationale = { onRequiredPermissionLastTime ->
+        (reactContext.currentActivity as AppCompatActivity).showDialog(
+          R.string.read_permission_required,
+          R.string.read_permission_required_message,
+          android.R.string.ok,
+          onPositiveButtonClick = { onRequiredPermissionLastTime() }
+        )
+      },
+      onDenied = {
+        promise.reject(
+          "missing_permission",
+          "Missing permission ${Utils.readPermission}"
+        )
+      }
+    )
+    return
+  }
+
+  private fun uploadAndObserve(videoId: String, filePath: String, promise: Promise) {
     try {
       val operationWithRequest = workManager.upload(videoId, File(filePath))
       val workInfoLiveData = workManager.getWorkInfoByIdLiveData(operationWithRequest.request.id)
