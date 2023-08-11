@@ -18,7 +18,7 @@
     - [Permissions](#permissions)
     - [Notifications](#notifications)
 - [Example](#example)
-- [Plugins](#plugins)
+- [Dependencies](#dependencies)
 - [FAQ](#faq)
 
 <!--</documentation_excluded>-->
@@ -96,9 +96,15 @@ To customize the notification to your own brand, you can change the icon, color 
 
 An example that demonstrates how to use the API is provided in folder [example/](https://github.com/apivideo/api.video-reactnative-uploader/tree/main/example).
 
-## Plugins
+To run the example:
+  - for Android:
+`yarn && yarn example android`
+  - for iOS:
+`yarn && yarn example ios`
 
-api.video-reactnative-uploader is using external native library for upload
+## Dependencies
+
+api.video-reactnative-uploader is using external libraries.
 
 | Plugin                 | README                   |
 | ---------------------- | ------------------------ |
