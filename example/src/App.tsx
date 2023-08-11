@@ -17,7 +17,7 @@ import ReactNativeBlobUtil from 'react-native-blob-util';
 import { DemoButton } from './components/DemoButton';
 import { DemoResponse } from './components/DemoResponse';
 import { DemoTitle } from './components/DemoTitle';
-import type { Video } from 'src/ApiVideoUploaderTypes';
+import type { Video } from 'src/types';
 
 export default function App() {
   const [videoFile, setVideoFile] = React.useState<string | null>(null);

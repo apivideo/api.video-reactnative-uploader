@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import type { Environment, Video } from './ApiVideoUploaderTypes';
+import type { Environment, Video } from './types';
 
 const LINKING_ERROR =
   `The package '@api.video/react-native-video-uploader' doesn't seem to be linked. Make sure: \n\n` +
