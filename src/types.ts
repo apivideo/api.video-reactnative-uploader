@@ -1,4 +1,3 @@
-
 export enum Environment {
   Sandbox = 'https://sandbox.api.video',
   Production = 'https://ws.api.video',

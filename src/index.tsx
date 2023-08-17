@@ -45,17 +45,23 @@ export default {
   setTimeout: (timeout: number): void => {
     return ApiVideoUploader.setTimeout(timeout);
   },
-  uploadWithUploadToken: (token: string, filepath: string, videoId?: string): Promise<Video> => {
-    return ApiVideoUploader.uploadWithUploadToken(token, filepath, videoId).then(
-      (value: string) => {
-        const json = JSON.parse(value);
+  uploadWithUploadToken: (
+    token: string,
+    filepath: string,
+    videoId?: string
+  ): Promise<Video> => {
+    return ApiVideoUploader.uploadWithUploadToken(
+      token,
+      filepath,
+      videoId
+    ).then((value: string) => {
+      const json = JSON.parse(value);
 
-        return {
-          ...json,
-          _public: json.public,
-        } as Video;
-      }
-    );
+      return {
+        ...json,
+        _public: json.public,
+      } as Video;
+    });
   },
   upload: (videoId: string, filepath: string): Promise<Video> => {
     return ApiVideoUploader.upload(videoId, filepath).then((value: string) => {
