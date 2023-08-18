@@ -214,7 +214,7 @@ class UploaderModule(private val reactContext: ReactApplicationContext) :
 
   companion object {
     const val NAME = "ApiVideoUploader"
-    const val TAG = "UploadModule"
+    const val TAG = "UploaderModule"
 
     const val SDK_NAME = "reactnative-uploader"
     const val SDK_VERSION = "1.1.0"
