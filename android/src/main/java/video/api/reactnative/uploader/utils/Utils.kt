@@ -1,4 +1,4 @@
-package video.api.reactnative.uploader
+package video.api.reactnative.uploader.utils
 
 import android.Manifest
 import android.os.Build

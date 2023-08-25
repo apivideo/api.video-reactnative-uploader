@@ -1,4 +1,4 @@
-package video.api.reactnative.uploader.extensions
+package video.api.reactnative.uploader.utils
 
 import android.content.Context
 import android.content.DialogInterface

@@ -1,4 +1,4 @@
-package video.api.reactnative.uploader.extensions
+package video.api.reactnative.uploader.utils
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
