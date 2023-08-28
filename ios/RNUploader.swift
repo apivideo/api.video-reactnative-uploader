@@ -2,105 +2,77 @@ import ApiVideoUploader
 
 @objc(RNUploader)
 class RNUploader: NSObject {
-    
+    let uploadModule = UploaderModule()
+
     override init() {
-        try? ApiVideoUploader.setSdkName(name: "reactnative-uploader", version: "1.1.0")
-    }
-    
-    @objc(setEnvironment:)
-    func setEnvironment(environment: String) -> Void {
-        ApiVideoUploader.basePath = environment
-    }
-    
-    @objc(setApiKey:)
-    func setApiKey(apiKey: String) -> Void {
-        ApiVideoUploader.apiKey = apiKey
-    }
- 
-    @objc(setApplicationName::)
-    func setApplicationName(name: String, version: String) -> Void {
-        try! ApiVideoUploader.setApplicationName(name: name, version: version)
-    }
-    
-    @objc(setChunkSize:withResolver:withRejecter:)
-    func setChunkSize(size: NSNumber, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
         do {
-            try ApiVideoUploader.setChunkSize(chunkSize: Int(truncating: size))
-            resolve(ApiVideoUploader.getChunkSize())
+            try uploadModule.setSdkName(name: "reactnative-uploader", version: "1.1.0")
+        } catch {
+            fatalError("Failed to set SDK name: \(error)")
+        }
+    }
+
+    @objc static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
+    @objc(setEnvironment:)
+    func setEnvironment(environment: String) {
+        uploadModule.environment = environment
+    }
+
+    @objc(setApiKey:)
+    func setApiKey(apiKey: String) {
+        uploadModule.apiKey = apiKey
+    }
+
+    @objc(setApplicationName::)
+    func setApplicationName(name: String, version: String) {
+        do {
+            try uploadModule.setApplicationName(name: name, version: version)
+        } catch {
+            fatalError("Failed to set Application name: \(error)")
+        }
+    }
+
+    @objc(setChunkSize:withResolver:withRejecter:)
+    func setChunkSize(size: NSNumber, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+        do {
+            try uploadModule.setChunkSize(size.intValue)
+            resolve(uploadModule.chunkSize)
         } catch {
             reject("failed_to_set_chunk_size", "Failed to set chunk size", error)
         }
     }
 
     @objc(setTimeout:)
-    func setTimeout(timeout: NSNumber) -> Void {
-        ApiVideoUploader.timeout = timeout.doubleValue
-        print(ApiVideoUploader.timeout)
+    func setTimeout(timeout: NSNumber) {
+        uploadModule.timeout = timeout.doubleValue
     }
-    
+
     @objc(uploadWithUploadToken:::withResolver:withRejecter:)
-    func uploadWithUploadToken(token: String, filePath: String, videoId: String?, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+    func uploadWithUploadToken(token: String, filePath: String, videoId: String?, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         do {
-            let url = URL(string: filePath)!
-            try VideosAPI.uploadWithUploadToken(token: token, file: url, videoId: videoId, onProgressReady: nil) { (video, error) in
-                if let error = error {
-                    if case let ErrorResponse.error(code, data, _, _) = error {
-                        var message: String? = nil
-                        if let data = data {
-                            message = String(decoding: data, as: UTF8.self)
-                        }
-                        reject(String(code), message, error)
-                    } else {
-                        reject("upload_with_upload_token_failed", "Upload with upload token failed", error)
-                    }
-                }
-                if let video = video {
-                    let encodeResult = CodableHelper.encode(video)
-                    do {
-                        let json = try encodeResult.get()
-                        resolve(String(decoding: json, as: UTF8.self))
-                    } catch {
-                        reject("serialization_failed", "Failed to serialize JSON", error)
-                    }
-                }
-            }
+            try uploadModule.uploadWithUploadToken(token: token, filePath: filePath, videoId: videoId, onProgress: { _ in }, onSuccess: { video in
+                resolve(video)
+            }, onError: { error in
+                reject("upload_with_upload_token_failed", error.localizedDescription, error)
+            })
         } catch {
-            reject("upload_failed", "Failed to initiate upload", error)
-        }
-    }
-    
-    @objc(upload::withResolver:withRejecter:)
-    func upload(videoId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-        do {
-            let url = URL(string: filePath)!
-            try VideosAPI.upload(videoId: videoId, file: url, onProgressReady: nil) { (video, error) in
-                if let error = error {
-                    if case let ErrorResponse.error(code, data, _, _) = error {
-                        var message: String? = nil
-                        if let data = data {
-                            message = String(decoding: data, as: UTF8.self)
-                        }
-                        reject(String(code), message, error)
-                    } else {
-                        reject("upload_failed", "Upload failed", error)
-                    }
-                }
-                if let video = video {
-                    let encodeResult = CodableHelper.encode(video)
-                    do {
-                        let json = try encodeResult.get()
-                        resolve(String(decoding: json, as: UTF8.self))
-                    } catch {
-                        reject("serialization_failed", "Failed to serialize JSON", error)
-                    }
-                }
-            }
-        } catch {
-            reject("upload_failed", "Failed to initiate upload", error)
+            reject("upload_with_upload_token_failed", error.localizedDescription, error)
         }
     }
 
-    @objc static func requiresMainQueueSetup() -> Bool {
-        return false
+    @objc(upload::withResolver:withRejecter:)
+    func upload(videoId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        do {
+            try uploadModule.upload(videoId: videoId, filePath: filePath, onProgress: { _ in }, onSuccess: { video in
+                resolve(video)
+            }, onError: { error in
+                reject("upload_failed", error.localizedDescription, error)
+            })
+        } catch {
+            reject("upload_failed", error.localizedDescription, error)
+        }
     }
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		21B1509A2A790B7C004A5024 /* RNUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B150982A790B7C004A5024 /* RNUploader.swift */; };
 		21B1509B2A790B7C004A5024 /* RNUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B150992A790B7C004A5024 /* RNUploader.m */; };
+		21EE33562A9C7FBE001D91C9 /* ProgressExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE33542A9C7FBE001D91C9 /* ProgressExtensions.swift */; };
+		21EE33572A9C7FBE001D91C9 /* UploaderModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE33552A9C7FBE001D91C9 /* UploaderModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,8 @@
 		21B150972A790B7C004A5024 /* RNUploader-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNUploader-Bridging-Header.h"; sourceTree = "<group>"; };
 		21B150982A790B7C004A5024 /* RNUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNUploader.swift; sourceTree = "<group>"; };
 		21B150992A790B7C004A5024 /* RNUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNUploader.m; sourceTree = "<group>"; };
+		21EE33542A9C7FBE001D91C9 /* ProgressExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressExtensions.swift; sourceTree = "<group>"; };
+		21EE33552A9C7FBE001D91C9 /* UploaderModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploaderModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				21EE33542A9C7FBE001D91C9 /* ProgressExtensions.swift */,
+				21EE33552A9C7FBE001D91C9 /* UploaderModule.swift */,
 				21B150972A790B7C004A5024 /* RNUploader-Bridging-Header.h */,
 				21B150992A790B7C004A5024 /* RNUploader.m */,
 				21B150982A790B7C004A5024 /* RNUploader.swift */,
@@ -120,7 +126,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				21B1509B2A790B7C004A5024 /* RNUploader.m in Sources */,
+				21EE33572A9C7FBE001D91C9 /* UploaderModule.swift in Sources */,
 				21B1509A2A790B7C004A5024 /* RNUploader.swift in Sources */,
+				21EE33562A9C7FBE001D91C9 /* ProgressExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
