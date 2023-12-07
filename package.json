@@ -41,7 +41,9 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "uploader",
+    "video"
   ],
   "repository": "https://github.com/apivideo/api.video-reactnative-uploader",
   "author": "api.video ecosystem team <ecosystem@api.video> (https://api.video)",
