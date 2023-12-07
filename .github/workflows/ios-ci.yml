@@ -7,16 +7,16 @@ jobs:
     strategy:
       matrix:
         extraEnv: [RCT_NEW_ARCH_ENABLED=0, RCT_NEW_ARCH_ENABLED=1]
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install latest Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'yarn'
