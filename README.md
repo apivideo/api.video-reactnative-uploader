@@ -67,7 +67,7 @@ cd ios && pod install
 ```js
 import ApiVideoUploader from '@api.video/react-native-video-uploader';
 
-ApiVideoUploader.uploadWithUploadToken('MY_VIDEO_TOKEN', 'my-video.mp4')
+ApiVideoUploader.uploadWithUploadToken('YOUR_UPLOAD_TOKEN', 'path/to/my-video.mp4')
   .then((value: Video) => {
    // Manages success here
   })
@@ -83,6 +83,16 @@ ApiVideoUploader.uploadWithUploadToken('MY_VIDEO_TOKEN', 'my-video.mp4')
 Permissions `android.permission.READ_MEDIA_VIDEO` (for API 33+) or `android.permission.READ_EXTERNAL_STORAGE` (for API < 33) will be requested by this library at runtime.
 
 On Android 33+, the upload comes with a notification to show the progress. So if your application targets Android 33+, you might request `android.permission.POST_NOTIFICATIONS` permission at runtime.
+
+When targeting Android API Level 34+, you must declare the service type in your application's manifest file.
+In your `AndroidManifest.xml` file, add the following lines in the `<application>` tag:
+
+```xml
+    <service
+        android:name="androidx.work.impl.foreground.SystemForegroundService"
+        android:foregroundServiceType="location|dataSync"
+        tools:node="merge" />
+```
 
 #### Notifications
 
