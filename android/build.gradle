@@ -103,8 +103,8 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
 
-  implementation 'video.api:android-video-uploader:1.3.3'
-  implementation 'androidx.work:work-runtime-ktx:2.8.1'
+  implementation 'video.api:android-video-uploader:1.3.4'
+  implementation 'androidx.work:work-runtime-ktx:2.9.0'
 }
 
 if (isNewArchitectureEnabled()) {
