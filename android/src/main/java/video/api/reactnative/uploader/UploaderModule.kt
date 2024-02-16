@@ -1,72 +1,97 @@
 package video.api.reactnative.uploader
 
+import androidx.appcompat.app.AppCompatActivity
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import video.api.uploader.VideosApi
-import video.api.uploader.api.JSON
-import java.io.File
+import java.util.concurrent.CancellationException
+
 
 class UploaderModule(reactContext: ReactApplicationContext) :
-  ReactContextBaseJavaModule(reactContext) {
-  private var videosApi = VideosApi()
-  private val json = JSON()
+  UploaderModuleSpec(reactContext) {
+  private val uploaderModuleImpl = UploaderModuleImpl(
+    reactContext,
+    UploaderLiveDataHost(reactContext.currentActivity as AppCompatActivity),
+    PermissionManager(reactContext)
+  )
 
   init {
-    videosApi.apiClient.setSdkName("reactnative-uploader", "1.0.0")
+    uploaderModuleImpl.setSdkName(SDK_NAME, SDK_VERSION)
   }
 
-  override fun getName(): String {
-    return "ApiVideoUploader"
+  override fun getName() = NAME
+
+  @ReactMethod
+  override fun setApplicationName(name: String, version: String) {
+    uploaderModuleImpl.setApplicationName(name, version)
   }
 
   @ReactMethod
-  fun setApplicationName(name: String, version: String) {
-    videosApi.apiClient.setApplicationName(name, version)
+  override fun setApiKey(apiKey: String?) {
+    uploaderModuleImpl.apiKey = apiKey
   }
 
   @ReactMethod
-  fun setApiKey(apiKey: String?) {
-    val chunkSize = videosApi.apiClient.uploadChunkSize
-    videosApi = if (apiKey == null) {
-      VideosApi(videosApi.apiClient.basePath)
-    } else {
-      VideosApi(apiKey, videosApi.apiClient.basePath)
-    }
-    videosApi.apiClient.uploadChunkSize = chunkSize
+  override fun setEnvironment(environment: String) {
+    uploaderModuleImpl.environment = environment
   }
 
   @ReactMethod
-  fun setEnvironment(environment: String) {
-    videosApi.apiClient.basePath = environment
-  }
-
-  @ReactMethod
-  fun setChunkSize(size: Int, promise: Promise) {
+  override fun setChunkSize(size: Double, promise: Promise) {
     try {
-      videosApi.apiClient.uploadChunkSize = size.toLong()
-      promise.resolve(videosApi.apiClient.uploadChunkSize.toInt())
+      uploaderModuleImpl.chunkSize = size.toLong()
+      promise.resolve(uploaderModuleImpl.chunkSize.toInt())
     } catch (e: Exception) {
       promise.reject("failed_to_set_chunk_size", "Failed to set chunk size", e)
     }
   }
 
   @ReactMethod
-  fun uploadWithUploadToken(token: String, filePath: String, promise: Promise) {
+  override fun setTimeout(timeout: Double) {
+    uploaderModuleImpl.timeout = timeout
+  }
+
+  @ReactMethod
+  override fun uploadWithUploadToken(
+    token: String,
+    filePath: String,
+    videoId: String?,
+    promise: Promise
+  ) {
     try {
-      promise.resolve(json.serialize(videosApi.uploadWithUploadToken(token, File(filePath))))
+      uploaderModuleImpl.uploadWithUploadToken(token, filePath, videoId, { _ ->
+      }, { video ->
+        promise.resolve(video)
+      }, {
+        promise.reject(CancellationException("Upload was cancelled"))
+      }, { e ->
+        promise.reject(e)
+      })
     } catch (e: Exception) {
-      promise.reject("upload_with_upload_token_failed", "Upload with upload token failed", e)
+      promise.reject(e)
     }
   }
 
   @ReactMethod
-  fun upload(videoId: String, filePath: String, promise: Promise) {
+  override fun upload(videoId: String, filePath: String, promise: Promise) {
     try {
-      promise.resolve(json.serialize(videosApi.upload(videoId, File(filePath))))
+      uploaderModuleImpl.upload(videoId, filePath, { _ ->
+      }, { video ->
+        promise.resolve(video)
+      }, {
+        promise.reject(CancellationException("Upload was cancelled"))
+      }, { e ->
+        promise.reject(e)
+      })
     } catch (e: Exception) {
-      promise.reject("upload_failed", "Upload failed", e)
+      promise.reject(e)
     }
+  }
+
+  companion object {
+    const val NAME = "ApiVideoUploader"
+
+    const val SDK_NAME = "reactnative-uploader"
+    const val SDK_VERSION = "1.1.0"
   }
 }

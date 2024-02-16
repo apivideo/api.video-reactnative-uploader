@@ -14,8 +14,11 @@
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Code sample](#code-sample)
+  - [Android](#android)
+    - [Permissions](#permissions)
+    - [Notifications](#notifications)
 - [Example](#example)
-- [Plugins](#plugins)
+- [Dependencies](#dependencies)
 - [FAQ](#faq)
 
 <!--</documentation_excluded>-->
@@ -64,7 +67,7 @@ cd ios && pod install
 ```js
 import ApiVideoUploader from '@api.video/react-native-video-uploader';
 
-ApiVideoUploader.uploadWithUploadToken('MY_VIDEO_TOKEN', 'my-video.mp4')
+ApiVideoUploader.uploadWithUploadToken('YOUR_UPLOAD_TOKEN', 'path/to/my-video.mp4')
   .then((value: Video) => {
    // Manages success here
   })
@@ -73,13 +76,45 @@ ApiVideoUploader.uploadWithUploadToken('MY_VIDEO_TOKEN', 'my-video.mp4')
   });
 ```
 
+### Android
+
+#### Permissions
+
+Permissions `android.permission.READ_MEDIA_VIDEO` (for API 33+) or `android.permission.READ_EXTERNAL_STORAGE` (for API < 33) will be requested by this library at runtime.
+
+On Android 33+, the upload comes with a notification to show the progress. So if your application targets Android 33+, you might request `android.permission.POST_NOTIFICATIONS` permission at runtime.
+
+When targeting Android API Level 34+, you must declare the service type in your application's manifest file.
+In your `AndroidManifest.xml` file, add the following lines in the `<application>` tag:
+
+```xml
+    <service
+        android:name="androidx.work.impl.foreground.SystemForegroundService"
+        android:foregroundServiceType="location|dataSync"
+        tools:node="merge" />
+```
+
+#### Notifications
+
+To customize the notification to your own brand, you can change the icon, color or channel name by overwriting the following resources in your own application resources:
+  - the icon: `R.drawable.ic_upload_notification`
+  - the color: `R.color.upload_notification_color`
+  - the channel name: `R.string.upload_notification_channel_name`
+
+
 ## Example
 
-An example that demonstrates how to use the API is provided in folder [example/](https://github.com/apivideo/api.video-reactnative-uploader/tree/master/example).
+An example that demonstrates how to use the API is provided in folder [example/](https://github.com/apivideo/api.video-reactnative-uploader/tree/main/example).
 
-## Plugins
+To run the example:
+  - for Android:
+`yarn && yarn example android`
+  - for iOS:
+`yarn && yarn example ios`
 
-api.video-reactnative-uploader is using external native library for upload
+## Dependencies
+
+api.video-reactnative-uploader is using external libraries.
 
 | Plugin                 | README                   |
 | ---------------------- | ------------------------ |
@@ -88,8 +123,7 @@ api.video-reactnative-uploader is using external native library for upload
 
 ## FAQ
 
-If you have any questions, ask [our community](https://community.api.video).
-Or use [Issues].
+If you have any questions, ask [our community](https://community.api.video) or use [Issues].
 
 [//]: # "These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax"
 [swift-video-uploader]: https://github.com/apivideo/api.video-swift-uploader

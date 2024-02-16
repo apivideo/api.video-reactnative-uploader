@@ -14,10 +14,10 @@ import {
 import type { ImagePickerResponse } from 'react-native-image-picker';
 import * as ImagePicker from 'react-native-image-picker';
 import ReactNativeBlobUtil from 'react-native-blob-util';
-import type { Video } from 'src/video-type';
 import { DemoButton } from './components/DemoButton';
 import { DemoResponse } from './components/DemoResponse';
 import { DemoTitle } from './components/DemoTitle';
+import type { Video } from 'src/types';
 
 export default function App() {
   const [videoFile, setVideoFile] = React.useState<string | null>(null);
@@ -29,15 +29,13 @@ export default function App() {
   const requestPermissions = async () => {
     if (Platform.OS === 'android') {
       const granted = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
         PermissionsAndroid.PERMISSIONS.CAMERA,
       ]);
 
       if (
         granted['android.permission.CAMERA'] !==
-          PermissionsAndroid.RESULTS.GRANTED ||
-        granted['android.permission.READ_EXTERNAL_STORAGE'] !==
-          PermissionsAndroid.RESULTS.GRANTED
+        PermissionsAndroid.RESULTS.GRANTED
       ) {
         throw new Error('Permissions request failed');
       }
