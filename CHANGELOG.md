@@ -1,6 +1,13 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.1.0] - 2024-02-16
+- Add support for RN new architecture: Turbo Native Modules
+- Add an API to set time out
+- Add an API to upload with upload token and video id
+- Android: add support for upload in background
+- Android: request permission at runtime
+
 ## [1.0.0] - 2022-07-06
 - Android: Fix set chunk unhandled exception
 - Add API to set application name
