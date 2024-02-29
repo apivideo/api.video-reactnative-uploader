@@ -79,9 +79,9 @@ In your `AndroidManifest.xml` file, add the following lines in the `<application
 
 ```xml
     <service
-        android:name="androidx.work.impl.foreground.SystemForegroundService"
-        android:foregroundServiceType="location|dataSync"
-        tools:node="merge" />
+      android:name="androidx.work.impl.foreground.SystemForegroundService"
+      android:exported="false"
+      android:foregroundServiceType="dataSync" />
 ```
 
 #### Notifications
