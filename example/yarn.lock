@@ -4527,10 +4527,10 @@ react-native-blob-util@^0.19.6:
     base-64 "0.1.0"
     glob "^10.3.10"
 
-react-native-image-picker@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-7.1.0.tgz#1a41cc45ccdc177c2ebf7c7accee0ceadc36abd8"
-  integrity sha512-An0hn2mwqjGAA2mbsXdHRTyoMMklGPT9stIjE2zvkegU7CdoFhowqvVHfnELJNZnfAiSQuIaeY//z0r1R0lsgw==
+react-native-image-picker@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-7.1.1.tgz#89ea4611d5a05e4748adefef9bdf22e175f6f56d"
+  integrity sha512-8zQS8RJkGq+jV6bzmIQ560QL2tccXUwouDWktJt7typfNu/QpuDm9pnESeLkdA5MHGTMm8YR09tcV1qtBD+0fg==
 
 react-native@0.73.4:
   version "0.73.4"

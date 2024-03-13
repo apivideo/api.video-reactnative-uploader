@@ -12,7 +12,7 @@
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-blob-util": "^0.19.6",
-    "react-native-image-picker": "^7.1.0"
+    "react-native-image-picker": "^7.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

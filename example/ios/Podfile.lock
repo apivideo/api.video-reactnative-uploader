@@ -893,7 +893,7 @@ PODS:
     - React-debug
   - react-native-blob-util (0.19.6):
     - React-Core
-  - react-native-image-picker (7.1.0):
+  - react-native-image-picker (7.1.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1276,7 +1276,7 @@ SPEC CHECKSUMS:
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 63913773ed7f96b814a2521e13e6d010282096ad
   react-native-blob-util: d8fa1a7f726867907a8e43163fdd8b441d4489ea
-  react-native-image-picker: 6c51359eca7a7df9f07e297218c25696eb9da976
+  react-native-image-picker: 1a7cd3224036e080fe46bcb955f2eb42fcbf7acc
   react-native-video-uploader: 433b371c64ab080ec1bb77de6dfa349f17488e7a
   React-nativeconfig: d7af5bae6da70fa15ce44f045621cf99ed24087c
   React-NativeModulesApple: 0123905d5699853ac68519607555a9a4f5c7b3ac
