@@ -75,4 +75,45 @@ class RNUploader: NSObject {
             reject("upload_failed", error.localizedDescription, error)
         }
     }
+
+    @objc(createUploadProgressiveSession::)
+    func createUploadProgressiveSession(sessionId: String, videoId: String) {
+        do {
+            try uploadModule.createUploadProgressiveSession(sessionId: sessionId, videoId: videoId)
+        } catch {
+            fatalError("Failed to create progressive upload session: \(error)")
+        }
+    }
+
+    @objc(createProgressiveUploadWithUploadTokenSession:::)
+    func createProgressiveUploadWithUploadTokenSession(sessionId: String, token: String, videoId: String?) {
+        do {
+            try uploadModule.createProgressiveUploadWithUploadTokenSession(sessionId: sessionId, token: token, videoId: videoId)
+        } catch {
+            fatalError("Failed to create progressive upload with upload token session: \(error)")
+        }
+    }
+
+    @objc(uploadPart::withResolver:withRejecter:)
+    func uploadPart(sessionId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        uploadModule.uploadPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { _ in
+            resolve(nil)
+        }, onError: { error in
+            reject("upload_part_failed", error.localizedDescription, error)
+        })
+    }
+
+    @objc(uploadLastPart::withResolver:withRejecter:)
+    func uploadLastPart(sessionId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        uploadModule.uploadLastPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { _ in
+            resolve(nil)
+        }, onError: { error in
+            reject("upload_part_failed", error.localizedDescription, error)
+        })
+    }
+
+    @objc(disposeProgressiveUploadSession:)
+    func disposeProgressiveUploadSession(sessionId: String) {
+        uploadModule.disposeProgressiveUploadSession(sessionId)
+    }
 }

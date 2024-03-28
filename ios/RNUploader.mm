@@ -34,13 +34,27 @@ RCT_EXTERN_METHOD(setChunkSize:(nonnull NSNumber)size
 
 RCT_EXTERN_METHOD(setTimeout:(NSNumber)timeout)
 
-RCT_EXTERN_METHOD(uploadWithUploadToken:(NSString)token:(NSString)filePath:(NSString)videoId
+// MARK: Regular upload
+RCT_EXTERN_METHOD(uploadWithUploadToken:(nonnull NSString)token:(nonnull NSString)filePath:(NSString)videoId
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(upload:(NSString)videoId:(NSString)filePath
+RCT_EXTERN_METHOD(upload:(nonnull NSString)videoId:(nonnull NSString)filePath
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
+
+// MARK: Progressive upload
+RCT_EXTERN_METHOD(createUploadProgressiveSession:(nonnull NSString)sessionId:(nonnull NSString)videoId)
+RCT_EXTERN_METHOD(createProgressiveUploadWithUploadTokenSession:(nonnull NSString)sessionId:(nonnull NSString)token:(NSString)videoId)
+
+RCT_EXTERN_METHOD(uploadPart:(nonnull NSString)sessionId:(nonnull NSString)filePath
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(uploadLastPart:(nonnull NSString)sessionId:(nonnull NSString)filePath
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(disposeProgressiveUploadSession:(nonnull NSString)sessionId)
 
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED
