@@ -1,6 +1,9 @@
 # Changelog
 All changes to this project will be documented in this file.
 
+## [1.2.0] - 2024-04-03
+- Add support of progressive uploads
+
 ## [1.1.0] - 2024-02-16
 - Add support for RN new architecture: Turbo Native Modules
 - Add an API to set time out
