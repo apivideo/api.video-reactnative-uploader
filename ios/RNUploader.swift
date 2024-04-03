@@ -96,8 +96,8 @@ class RNUploader: NSObject {
 
     @objc(uploadPart::withResolver:withRejecter:)
     func uploadPart(sessionId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        uploadModule.uploadPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { _ in
-            resolve(nil)
+        uploadModule.uploadPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { video in
+            resolve(video)
         }, onError: { error in
             reject("upload_part_failed", error.localizedDescription, error)
         })
@@ -105,10 +105,10 @@ class RNUploader: NSObject {
 
     @objc(uploadLastPart::withResolver:withRejecter:)
     func uploadLastPart(sessionId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        uploadModule.uploadLastPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { _ in
-            resolve(nil)
+        uploadModule.uploadLastPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { video in
+            resolve(video)
         }, onError: { error in
-            reject("upload_part_failed", error.localizedDescription, error)
+            reject("upload_last_part_failed", error.localizedDescription, error)
         })
     }
 
