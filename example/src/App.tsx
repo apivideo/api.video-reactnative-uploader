@@ -87,7 +87,7 @@ export default function App() {
       const resolveUri = (u: string): Promise<string> => {
         return Platform.OS === 'android'
           ? ReactNativeBlobUtil.fs.stat(u).then((stat) => stat.path)
-          : new Promise((resolve, _) => resolve(u));
+          : new Promise((resolve, _) => resolve(u.replace('file://', '')));
       };
 
       resolveUri(uri).then(async (u) => {
