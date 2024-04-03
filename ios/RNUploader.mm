@@ -32,7 +32,7 @@ RCT_EXTERN_METHOD(setChunkSize:(nonnull NSNumber)size
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(setTimeout:(NSNumber)timeout)
+RCT_EXTERN_METHOD(setTimeout:(nonnull NSNumber)timeout)
 
 // MARK: Regular upload
 RCT_EXTERN_METHOD(uploadWithUploadToken:(nonnull NSString)token:(nonnull NSString)filePath:(NSString)videoId
