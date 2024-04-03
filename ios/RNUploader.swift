@@ -6,7 +6,7 @@ class RNUploader: NSObject {
 
     override init() {
         do {
-            try uploadModule.setSdkName(name: "reactnative-uploader", version: "1.1.0")
+            try uploadModule.setSdkName(name: "reactnative-uploader", version: "1.2.0")
         } catch {
             fatalError("Failed to set SDK name: \(error)")
         }

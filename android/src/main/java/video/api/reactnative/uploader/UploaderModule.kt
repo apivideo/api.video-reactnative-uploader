@@ -142,6 +142,6 @@ class UploaderModule(reactContext: ReactApplicationContext) :
     const val NAME = "ApiVideoUploader"
 
     const val SDK_NAME = "reactnative-uploader"
-    const val SDK_VERSION = "1.1.0"
+    const val SDK_VERSION = "1.2.0"
   }
 }
