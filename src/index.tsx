@@ -120,7 +120,6 @@ export default {
 
       dispose() {
         ApiVideoUploader.disposeProgressiveUploadSession(this.#sessionId);
-        this.#sessionId = this.#generateSessionId();
       }
 
       #generateSessionId() {
