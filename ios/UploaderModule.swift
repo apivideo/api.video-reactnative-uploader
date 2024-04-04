@@ -135,4 +135,3 @@ public class UploaderModule: NSObject {
 public enum UploaderError: Error {
     case invalidParameter(message: String)
 }
-

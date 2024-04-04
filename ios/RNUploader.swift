@@ -6,7 +6,7 @@ class RNUploader: NSObject {
 
     override init() {
         do {
-            try uploadModule.setSdkName(name: "reactnative-uploader", version: "1.1.0")
+            try uploadModule.setSdkName(name: "reactnative-uploader", version: "1.2.0")
         } catch {
             fatalError("Failed to set SDK name: \(error)")
         }
@@ -74,5 +74,46 @@ class RNUploader: NSObject {
         } catch {
             reject("upload_failed", error.localizedDescription, error)
         }
+    }
+
+    @objc(createUploadProgressiveSession::)
+    func createUploadProgressiveSession(sessionId: String, videoId: String) {
+        do {
+            try uploadModule.createUploadProgressiveSession(sessionId: sessionId, videoId: videoId)
+        } catch {
+            fatalError("Failed to create progressive upload session: \(error)")
+        }
+    }
+
+    @objc(createProgressiveUploadWithUploadTokenSession:::)
+    func createProgressiveUploadWithUploadTokenSession(sessionId: String, token: String, videoId: String?) {
+        do {
+            try uploadModule.createProgressiveUploadWithUploadTokenSession(sessionId: sessionId, token: token, videoId: videoId)
+        } catch {
+            fatalError("Failed to create progressive upload with upload token session: \(error)")
+        }
+    }
+
+    @objc(uploadPart::withResolver:withRejecter:)
+    func uploadPart(sessionId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        uploadModule.uploadPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { video in
+            resolve(video)
+        }, onError: { error in
+            reject("upload_part_failed", error.localizedDescription, error)
+        })
+    }
+
+    @objc(uploadLastPart::withResolver:withRejecter:)
+    func uploadLastPart(sessionId: String, filePath: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        uploadModule.uploadLastPart(sessionId: sessionId, filePath: filePath, onProgress: { _ in }, onSuccess: { video in
+            resolve(video)
+        }, onError: { error in
+            reject("upload_last_part_failed", error.localizedDescription, error)
+        })
+    }
+
+    @objc(disposeProgressiveUploadSession:)
+    func disposeProgressiveUploadSession(sessionId: String) {
+        uploadModule.disposeProgressiveUploadSession(sessionId)
     }
 }

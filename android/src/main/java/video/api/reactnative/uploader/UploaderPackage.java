@@ -1,5 +1,6 @@
 package video.api.reactnative.uploader;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.facebook.react.TurboReactPackage;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class UploaderPackage extends TurboReactPackage {
   @Nullable
   @Override
-  public NativeModule getModule(String name, ReactApplicationContext reactContext) {
+  public NativeModule getModule(String name, @NonNull ReactApplicationContext reactContext) {
     if (name.equals(UploaderModule.NAME)) {
       return new UploaderModule(reactContext);
     } else {

@@ -14,6 +14,8 @@
 - [Getting started](#getting-started)
   - [Installation](#installation)
   - [Code sample](#code-sample)
+    - [Regular upload](#regular-upload)
+    - [Progressive upload](#progressive-upload)
   - [Android](#android)
     - [Permissions](#permissions)
     - [Notifications](#notifications)
@@ -54,6 +56,8 @@ yarn add @api.video/react-native-video-uploader
 
 ### Code sample
 
+#### Regular upload
+
 ```js
 import ApiVideoUploader from '@api.video/react-native-video-uploader';
 
@@ -64,6 +68,27 @@ ApiVideoUploader.uploadWithUploadToken('YOUR_UPLOAD_TOKEN', 'path/to/my-video.mp
   .catch((e: any) => {
     // Manages error here
   });
+```
+
+#### Progressive upload
+
+For more details about progressive uploads, see the [progressive upload documentation](https://docs.api.video/vod/progressive-upload).
+
+```js
+import ApiVideoUploader from '@api.video/react-native-video-uploader';
+
+(async () => {
+  const uploadSession = ApiVideoUploader.createProgressiveUploadSession({token: 'YOUR_UPLOAD_TOKEN'});
+  try {
+    await session.uploadPart("path/to/video.mp4.part1");
+    await session.uploadPart("path/to/video.mp4.part2");
+    // ...
+    const video = await session.uploadLastPart("path/to/video.mp4.partn");
+    // ...
+  } catch(e: any) {
+    // Manages error here
+  }
+})();
 ```
 
 ### Android

@@ -16,6 +16,27 @@ export interface Spec extends TurboModule {
     videoId?: string
   ) => Promise<String>;
   upload: (videoId: string, filepath: string) => Promise<String>;
+
+  // Progressive upload
+  /**
+   * Create a new session for progressive upload.
+   * @param sessionId - The session id. Must be unique.
+   */
+  createProgressiveUploadSession: (sessionId: string, videoId: string) => void;
+  /**
+   * Create a new session for progressive upload with upload token.
+   * @param sessionId - The session id. Must be unique.
+   */
+  createProgressiveUploadWithUploadTokenSession: (
+    sessionId: string,
+    token: string,
+    videoId?: string
+  ) => void;
+
+  uploadPart: (sessionId: string, filepath: string) => Promise<String>;
+  uploadLastPart: (sessionId: string, filepath: string) => Promise<String>;
+
+  disposeProgressiveUploadSession: (sessionId: string) => void;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('ApiVideoUploader');

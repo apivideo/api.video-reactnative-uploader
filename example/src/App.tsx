@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  Switch,
   Text,
   TextInput,
   View,
@@ -22,6 +23,7 @@ import type { Video } from 'src/types';
 export default function App() {
   const [videoFile, setVideoFile] = React.useState<string | null>(null);
   const [uploading, setUploading] = React.useState<boolean>(false);
+  const [isProgressive, setIsProgressive] = React.useState<boolean>(false);
   const [uploadToken, setUploadToken] = React.useState<string>('');
   const [chunkSize, setChunkSize] = React.useState<string>('20');
   const [uploadResult, setUploadResult] = React.useState<any | null>(null);
@@ -58,7 +60,12 @@ export default function App() {
   }, []);
 
   const onUploadButtonPress = React.useCallback(
-    (token: string, uri: string | null, chunkSize: string) => {
+    (
+      token: string,
+      uri: string | null,
+      chunkSize: string,
+      isProgressive: boolean
+    ) => {
       const chunkSizeInt = parseInt(chunkSize);
 
       if (!uri) {
@@ -80,19 +87,46 @@ export default function App() {
       const resolveUri = (u: string): Promise<string> => {
         return Platform.OS === 'android'
           ? ReactNativeBlobUtil.fs.stat(u).then((stat) => stat.path)
-          : new Promise((resolve, _) => resolve(u));
+          : new Promise((resolve, _) => resolve(u.replace('file://', '')));
       };
 
-      resolveUri(uri).then((u) => {
-        ApiVideoUploader.uploadWithUploadToken(token, u)
-          .then((value: Video) => {
-            setUploadResult(value);
-            setUploading(false);
-          })
-          .catch((e: any) => {
-            Alert.alert('Upload failed', e?.message || JSON.stringify(e));
-            setUploading(false);
+      resolveUri(uri).then(async (u) => {
+        if (isProgressive) {
+          const size = (await ReactNativeBlobUtil.fs.stat(u)).size;
+
+          const session = ApiVideoUploader.createProgressiveUploadSession({
+            token,
           });
+          const chunkSizeBytes = 1024 * 1024 * chunkSizeInt;
+          let start = 0;
+          for (
+            let i = 0;
+            start <= size - chunkSizeBytes;
+            start += chunkSizeBytes, i++
+          ) {
+            await ReactNativeBlobUtil.fs.slice(
+              u,
+              `${u}.part${i}`,
+              start,
+              start + chunkSizeBytes
+            );
+            await session.uploadPart(`${u}.part${i}`);
+          }
+          await ReactNativeBlobUtil.fs.slice(u, `${u}.lastpart`, start, size);
+          const value = await session.uploadLastPart(u + '.lastpart');
+          setUploadResult(value);
+          setUploading(false);
+        } else {
+          ApiVideoUploader.uploadWithUploadToken(token, u)
+            .then((value: Video) => {
+              setUploadResult(value);
+              setUploading(false);
+            })
+            .catch((e: any) => {
+              Alert.alert('Upload failed', e?.message || JSON.stringify(e));
+              setUploading(false);
+            });
+        }
       });
     },
     []
@@ -165,11 +199,35 @@ export default function App() {
                 keyboardType="numeric"
               />
             </View>
+            <View
+              style={{
+                borderLeftWidth: 1,
+                marginLeft: 8,
+                borderLeftColor: '#F64325',
+                marginVertical: 5,
+                alignItems: 'flex-start',
+              }}
+            >
+              <Text style={styles.label}>Progressive upload</Text>
+              <Switch
+                disabled={uploading}
+                trackColor={{ false: '#767577', true: '#767577' }}
+                thumbColor={isProgressive ? '#F64325' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={() => setIsProgressive(!isProgressive)}
+                value={isProgressive}
+              />
+            </View>
             <Text style={styles.textSectionTitle}>And finally... upload!</Text>
             <DemoButton
               disabled={uploading}
               onPress={() =>
-                onUploadButtonPress(uploadToken, videoFile, chunkSize)
+                onUploadButtonPress(
+                  uploadToken,
+                  videoFile,
+                  chunkSize,
+                  isProgressive
+                )
               }
             >
               {uploading ? 'UPLOADING...' : 'UPLOAD'}

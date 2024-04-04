@@ -25,6 +25,28 @@ const ApiVideoUploader = ApiVideoUploaderModule
       }
     );
 
+type ProgressiveUploadParams = { videoId: string };
+type ProgressiveUploadWithUploadTokenParams = {
+  token: string;
+  videoId?: string;
+};
+
+function isProgressiveUploadWithUploadTokenParams(
+  params: ProgressiveUploadWithUploadTokenParams | ProgressiveUploadParams
+): params is ProgressiveUploadWithUploadTokenParams {
+  return (
+    (params as ProgressiveUploadWithUploadTokenParams).token !== 'undefined'
+  );
+}
+
+function sanitizeVideo(videoJson: string): Video {
+  const video = JSON.parse(videoJson);
+  return {
+    ...video,
+    _public: video.public,
+  };
+}
+
 export default {
   setApplicationName: (name: string, version: string): void => {
     ApiVideoUploader.setApplicationName(name, version);
@@ -54,23 +76,55 @@ export default {
       token,
       filepath,
       videoId
-    ).then((value: string) => {
-      const json = JSON.parse(value);
-
-      return {
-        ...json,
-        _public: json.public,
-      } as Video;
-    });
+    ).then((value: string) => sanitizeVideo(value));
   },
   upload: (videoId: string, filepath: string): Promise<Video> => {
-    return ApiVideoUploader.upload(videoId, filepath).then((value: string) => {
-      const json = JSON.parse(value);
+    return ApiVideoUploader.upload(videoId, filepath).then((value: string) =>
+      sanitizeVideo(value)
+    );
+  },
 
-      return {
-        ...json,
-        _public: json.public,
-      } as Video;
-    });
+  createProgressiveUploadSession: (
+    params: ProgressiveUploadWithUploadTokenParams | ProgressiveUploadParams
+  ) => {
+    return new (class ProgressiveUploadSession {
+      #sessionId: string;
+
+      constructor() {
+        this.#sessionId = this.#generateSessionId();
+        if (isProgressiveUploadWithUploadTokenParams(params)) {
+          ApiVideoUploader.createProgressiveUploadWithUploadTokenSession(
+            this.#sessionId,
+            params.token,
+            params.videoId
+          );
+        } else {
+          ApiVideoUploader.createProgressiveUploadSession(
+            this.#sessionId,
+            params.videoId
+          );
+        }
+      }
+
+      uploadPart(filepath: string): Promise<Video> {
+        return ApiVideoUploader.uploadPart(this.#sessionId, filepath).then(
+          (value: string) => sanitizeVideo(value)
+        );
+      }
+
+      uploadLastPart(filepath: string): Promise<Video> {
+        return ApiVideoUploader.uploadLastPart(this.#sessionId, filepath).then(
+          (value: string) => sanitizeVideo(value)
+        );
+      }
+
+      dispose() {
+        ApiVideoUploader.disposeProgressiveUploadSession(this.#sessionId);
+      }
+
+      #generateSessionId() {
+        return Math.random().toString(36).substring(2);
+      }
+    })();
   },
 };
