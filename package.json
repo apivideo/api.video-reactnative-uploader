@@ -59,6 +59,9 @@
     "@commitlint/config-conventional": "^17.0.2",
     "@evilmartians/lefthook": "^1.2.2",
     "@react-native-community/eslint-config": "^3.2.0",
+    "@react-native/babel-preset": "^0.75.4",
+    "@react-native/eslint-config": "^0.75.4",
+    "@react-native/typescript-config": "^0.75.4",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
     "@types/react": "^18.2.6",
@@ -72,10 +75,7 @@
     "pod-install": "^0.1.38",
     "prettier": "^2.0.5",
     "react": "18.2.0",
-    "react-native": "^0.73.6",
-    "@react-native/babel-preset": "^0.73.21",
-    "@react-native/eslint-config": "^0.73.2",
-    "@react-native/typescript-config": "^0.73.1",
+    "react-native": "^0.75.4",
     "react-native-builder-bob": "^0.20.4",
     "release-it": "^15.8.0",
     "turbo": "^1.10.7",
@@ -174,5 +174,6 @@
     "android": {
       "javaPackageName": "video.api.reactnative.uploader"
     }
-  }
+  },
+  "packageManager": "yarn@3.6.4"
 }
