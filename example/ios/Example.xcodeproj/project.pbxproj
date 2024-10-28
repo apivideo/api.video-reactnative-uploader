@@ -13,6 +13,7 @@
 		210184012A77AA42002CBBD4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 210183FC2A77AA42002CBBD4 /* Images.xcassets */; };
 		210184022A77AA42002CBBD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 210183FD2A77AA42002CBBD4 /* LaunchScreen.storyboard */; };
 		210184032A77AA42002CBBD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 210183FE2A77AA42002CBBD4 /* main.m */; };
+		215753D12CC7EA58002B803A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 215753D02CC7EA58002B803A /* PrivacyInfo.xcprivacy */; };
 		2C40DDDA505F06A314C9ED84 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F3D969153649F35749782C /* libPods-Example.a */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		210183FC2A77AA42002CBBD4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Images.xcassets; sourceTree = "<group>"; };
 		210183FD2A77AA42002CBBD4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Example/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		210183FE2A77AA42002CBBD4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Example/main.m; sourceTree = "<group>"; };
+		215753D02CC7EA58002B803A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		23C1C94AA0B304D0C014E5FE /* Pods-Example-ExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-ExampleTests.release.xcconfig"; path = "Target Support Files/Pods-Example-ExampleTests/Pods-Example-ExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		31F3D969153649F35749782C /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		465A9F040E27A21448B657B9 /* libPods-Example-ExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example-ExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				215753D02CC7EA58002B803A /* PrivacyInfo.xcprivacy */,
 				210183F92A77AA42002CBBD4 /* AppDelegate.h */,
 				210183FB2A77AA42002CBBD4 /* AppDelegate.mm */,
 				210183FC2A77AA42002CBBD4 /* Images.xcassets */,
@@ -242,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				215753D12CC7EA58002B803A /* PrivacyInfo.xcprivacy in Resources */,
 				210184012A77AA42002CBBD4 /* Images.xcassets in Resources */,
 				210184022A77AA42002CBBD4 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -264,7 +268,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
 		204921BCE31DEFC729A21500 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -620,6 +624,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				USE_HERMES = true;
 			};
 			name = Debug;
