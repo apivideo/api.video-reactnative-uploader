@@ -2,7 +2,7 @@ import { NativeModules, Platform } from 'react-native';
 import type { Environment, Video } from './types';
 
 const LINKING_ERROR =
-  `The package '@api.video/react-native-video-uploader' doesn't seem to be linked. Make sure: \n\n` +
+  'The package \'@api.video/react-native-video-uploader\' doesn\'t seem to be linked. Make sure: \n\n' +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
