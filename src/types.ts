@@ -126,8 +126,16 @@ interface VideoAssets {
    */
   mp4?: string;
 }
-
+/**
+ * The origin of the last update on the video's `language` attribute.
+ */
 enum LanguageOrigin {
+  /**
+   * the language was set by the api
+   */
   api = 'api',
+  /**
+   * the language was done automatically by the API.
+   */
   auto = 'auto',
 }
