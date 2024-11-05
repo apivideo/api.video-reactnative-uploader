@@ -11,7 +11,7 @@ export interface Video {
   /**
    * When an webhook was created, presented in ISO-8601 format.
    */
-  createdAt?: Date;
+  createdAt: Date;
   /**
    * The title of the video content.
    */
@@ -19,25 +19,45 @@ export interface Video {
   /**
    * A description for the video content.
    */
-  description?: string;
+  description: string;
   /**
    * The date and time the API created the video. Date and time are provided using ISO-8601 UTC format.
    */
-  publishedAt?: string;
+  publishedAt: Date;
   /**
    * The date and time the video was updated. Date and time are provided using ISO-8601 UTC format.
    */
-  updatedAt?: Date;
+  updatedAt: Date;
+  /**
+   * The date and time the video was discarded. Date and time are provided using ISO-8601 UTC format.
+   */
+  discardedAt?: Date;
+  /**
+   * The date and time the video will be permanently deleted. Date and time are provided using ISO-8601 UTC format.
+   */
+  deletesAt?: Date;
+  /**
+   * Returns `true` for videos you discarded.
+   */
+  discarded: boolean;
+  /**
+   *  Returns the language of a video in [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format.
+   */
+  language?: Intl.Locale;
+  /**
+   *  Returns the origin of the last update on the video's `language` attribute.
+   */
+  languageOrigin?: LanguageOrigin;
   /**
    * One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.
    */
-  tags?: Array<string>;
+  tags: Array<string>;
   /**
    * Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
    */
-  metadata?: Array<Metadata>;
-  source?: VideoSource;
-  assets?: VideoAssets;
+  metadata: Array<Metadata>;
+  source: VideoSource;
+  assets: VideoAssets;
   /**
    * The id of the player that will be applied on the video.
    */
@@ -45,15 +65,15 @@ export interface Video {
   /**
    * Defines if the content is publicly reachable or if a unique token is needed for each play session.
    */
-  _public?: boolean;
+  _public: boolean;
   /**
    * Defines if video is panoramic.
    */
-  panoramic?: boolean;
+  panoramic: boolean;
   /**
    * This lets you know whether mp4 is supported. If enabled, an mp4 URL will be provided in the response for the video.
    */
-  mp4Support?: boolean;
+  mp4Support: boolean;
 }
 interface Metadata {
   /**
@@ -105,4 +125,17 @@ interface VideoAssets {
    * Available only if mp4Support is enabled. Raw mp4 url.
    */
   mp4?: string;
+}
+/**
+ * The origin of the last update on the video's `language` attribute.
+ */
+enum LanguageOrigin {
+  /**
+   * the language was set by the api
+   */
+  api = 'api',
+  /**
+   * the language was done automatically by the API.
+   */
+  auto = 'auto',
 }

@@ -22,7 +22,9 @@ export function DemoButton({
   return (
     <Pressable
       onPress={() => {
-        if (!disabled) {onPress();}
+        if (!disabled) {
+          onPress();
+        }
       }}
       style={{
         backgroundColor: color ? color : disabled ? '#FF7355' : '#F64325',
